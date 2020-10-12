@@ -1,0 +1,39 @@
+{% extends 'library/base.html' %}
+
+{% load library_extras %}
+
+{% block content %}
+<div>
+    <h2 class="display-5 text-center">My library</h2>
+    {% include 'library/search_form.html' with form=form %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">{% field_name books 'title' %}</th>
+            <th scope="col">{% field_name books 'author' %}</th>
+            <th scope="col">{% field_name books 'release_date' %}</th>
+            <th scope="col">{% field_name books 'isbn_number' %}</th>
+            <th scope="col">{% field_name books 'pages' %}</th>
+            <th scope="col">{% field_name books 'cover_url' %}</th>
+            <th scope="col">{% field_name books 'language' %}</th>
+            <th scope="col">#</th>
+        </tr>
+        </thead>
+        {% for book in books %}
+        <tbody>
+        <tr>
+            <td><a href="{% url 'update' book.id %}">{{ book.title }}</a></td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.release_date }}</td>
+            <td>{{ book.isbn_number }}</td>
+            <td>{{ book.pages }}</td>
+            <td><a href="{{ book.cover_url }}">{{ book.cover_url }}</a></td>
+            <td>{{ book.language }}</td>
+            <td>{% include 'library/delete_form.html' with id=book.id %}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock%}
