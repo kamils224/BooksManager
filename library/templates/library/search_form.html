@@ -1,22 +1,21 @@
 {% block content %}
 {% load crispy_forms_tags %}
-<form method="post">
-    {% csrf_token %}
+<form method="GET">
     <div class="row">
         <div class="col-2">
             {{ form.title | as_crispy_field }}
         </div>
         <div class="col-2">
-            {{ form.author|as_crispy_field }}
+            {{ form.author | as_crispy_field }}
         </div>
         <div class="col-2">
             {{ form.release_date_min | as_crispy_field }}
         </div>
         <div class="col-2">
-            {{ form.release_date_max|as_crispy_field }}
+            {{ form.release_date_max | as_crispy_field }}
         </div>
         <div class="col-2">
-            {{ form.language|as_crispy_field }}
+            {{ form.language | as_crispy_field }}
         </div>
         <div class="col-2 align-self-center text-center">
             <button type="submit" class="btn btn-lg btn-success">Search</button>
