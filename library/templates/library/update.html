@@ -1,6 +1,6 @@
-{% extends 'library/base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 <h2 class="display-5 text-center">Edit book</h2>
-{% include 'library/book_form.html' %}
-{% include 'library/delete_form.html' with id=book.id %}
+{% include 'forms/model_form.html' %}
+{% include 'forms/delete_form.html' with id=book.id %}
 {% endblock%}

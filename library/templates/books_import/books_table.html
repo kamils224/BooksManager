@@ -1,0 +1,30 @@
+{% load library_extras %}
+
+{% block content %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Release_date</th>
+            <th scope="col">ISBN</th>
+            <th scope="col">Pages</th>
+            <th scope="col">Cover url</th>
+            <th scope="col">Language</th>
+        </tr>
+        </thead>
+        {% for book in books %}
+        <tbody>
+        <tr>
+            <td class="word-wrap">{{ book.title }}</td>
+            <td class="word-wrap">{{ book.author }}</td>
+            <td >{{ book.release_date }}</td>
+            <td >{{ book.isbn_number }}</td>
+            <td >{{ book.pages }}</td>
+            <td class="word-wrap"><a href="{{ book.cover_url }}">{{ book.cover_url }}</a></td>
+            <td >{{ book.language }}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+{% endblock%}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h2 class="display-5 text-center">Import books</h2>
+    {% include 'forms/browse_api_form.html' with form=browse_api_form %}
+    {% include 'books_import/books_table.html' with books=books %}
+</div>
+{% endblock %}

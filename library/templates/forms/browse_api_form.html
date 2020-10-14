@@ -1,0 +1,41 @@
+{% block content %}
+{% load crispy_forms_tags %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-3">
+            {{ form.q | as_crispy_field }}
+        </div>
+        <div class="col-3">
+            {{ form.intitle | as_crispy_field }}
+        </div>
+        <div class="col-3">
+            {{ form.inauthor | as_crispy_field }}
+        </div>
+        <div class="col-3">
+            {{ form.inpublisher | as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            {{ form.subject | as_crispy_field }}
+        </div>
+        <div class="col-2">
+            {{ form.isbn | as_crispy_field }}
+        </div>
+        <div class="col-2">
+            {{ form.lccn | as_crispy_field }}
+        </div>
+        <div class="col-2">
+            {{ form.oclc | as_crispy_field }}
+        </div>
+        <div class="col-2 align-self-center text-center">
+            <button type="submit" name="action" value="browse" class="btn btn-lg btn-primary">Browse</button>
+        </div>
+        <div class="col-2 align-self-center text-center">
+            <button type="submit" name="action" value="import" class="btn btn-lg btn-success">Import all</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
