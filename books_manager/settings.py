@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'crispy_forms',
     'bootstrap_datepicker_plus',
+    'django_filters',
 ]
 BOOTSTRAP4 = {
     'include_jquery': True,

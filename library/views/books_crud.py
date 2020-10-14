@@ -5,37 +5,26 @@ from django.views import generic
 
 from ..forms import BookForm, BookSearchForm
 from ..models import Book
+from ..filters import BookFilter
 
 
 class BookList(generic.ListView):
     model = Book
     template_name = 'library/index.html'
     context_object_name = 'books'
+    paginate_by = 5
 
     def get_queryset(self):
-        queries = self.request.GET
-        if len(queries) == 0:
-            return Book.objects.all()
-        try:
-            form = BookSearchForm(data=queries)
-            books = Book.objects.filter(title__contains=form.data['title'],
-                                        author__contains=form.data['author'],
-                                        language__contains=form.data['language'])
-            date_min = form.data.release_date_min
-            date_max = form.data.release_date_max
-            if date_min:
-                books = books.filter(release_date__gt=date_min)
-            if form.data.release_date_max:
-                books = books.filter(release_date__lt=date_max)
-            return books
-        except ObjectDoesNotExist:
-            return Book.objects.none()
-        except KeyError:
-            raise Http404
+        qs = Book.objects.all()
+        filtered_list = BookFilter(self.request.GET, queryset=qs)
+        return filtered_list.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['search_form'] = BookSearchForm()
+        context['search_form'] = BookSearchForm(self.request.GET)
+        filter_query = self.request.GET.copy()
+        filter_query.pop('page', None)
+        context['filter'] = filter_query.urlencode()
         return context
 
 

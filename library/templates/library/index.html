@@ -4,6 +4,6 @@
 <div>
     <h2 class="display-5 text-center">My library</h2>
     {% include 'forms/search_form.html' with form=search_form %}
-    {% include 'library/books_table.html' with books=books %}
+    {% include 'library/books_table.html' with books=books page_obj=page_obj filter=filter %}
 </div>
 {% endblock%}
