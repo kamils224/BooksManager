@@ -1,18 +1,16 @@
-from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
 from django.urls import reverse_lazy
 from django.views import generic
 
+from ..filters import BookFilter
 from ..forms import BookForm, BookSearchForm
 from ..models import Book
-from ..filters import BookFilter
 
 
 class BookList(generic.ListView):
     model = Book
     template_name = 'library/index.html'
     context_object_name = 'books'
-    paginate_by = 5
+    paginate_by = 10
 
     def get_queryset(self):
         qs = Book.objects.all()
@@ -21,7 +19,9 @@ class BookList(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['search_form'] = BookSearchForm(self.request.GET)
+        form = BookSearchForm(self.request.GET)
+        if form.is_valid():
+            context['search_form'] = form
         filter_query = self.request.GET.copy()
         filter_query.pop('page', None)
         context['filter'] = filter_query.urlencode()
@@ -33,6 +33,8 @@ class BookCreate(generic.CreateView):
     template_name = 'library/create.html'
     form_class = BookForm
     success_url = reverse_lazy('index')
+    # note: it's better to add redirection based on current filtering
+    # for example by passing next url in post request
 
 
 class BookUpdate(generic.UpdateView):

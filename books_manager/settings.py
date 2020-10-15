@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap_datepicker_plus',
     'django_filters',
+    'rest_framework',
+    'api',
 ]
 BOOTSTRAP4 = {
     'include_jquery': True,
@@ -54,6 +56,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 ROOT_URLCONF = 'books_manager.urls'
 

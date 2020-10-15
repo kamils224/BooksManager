@@ -11,7 +11,6 @@
             <th scope="col">{% field_name books 'pages' %}</th>
             <th scope="col">{% field_name books 'cover_url' %}</th>
             <th scope="col">{% field_name books 'language' %}</th>
-            <th scope="col">#</th>
         </tr>
         </thead>
         {% for book in books %}
@@ -24,7 +23,6 @@
             <td >{{ book.pages }}</td>
             <td class="word-wrap"><a href="{{ book.cover_url }}">{{ book.cover_url }}</a></td>
             <td >{{ book.language }}</td>
-            <td> {% include 'forms/delete_form.html' with id=book.id %}</td>
         </tr>
         </tbody>
         {% endfor %}
