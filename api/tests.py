@@ -17,7 +17,7 @@ class BookApiTests(APITestCase):
                             isbn_number='0000000000', pages=50, cover_url='http://example2.com',
                             language='en')
 
-    def test_book_get_list(self):
+    def test_book_get_list(self) ->None:
         url = reverse('books-list')
         response = self.client.get(url, format='json')
         items_count = len(Book.objects.all())
@@ -25,7 +25,7 @@ class BookApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['results']), items_count)
 
-    def test_book_get_item(self):
+    def test_book_get_item(self) -> None:
         id = 1
         url = reverse('books-detail', args=(id,))
         response = self.client.get(url, format='json')
@@ -33,7 +33,7 @@ class BookApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['id'], item.id)
 
-    def test_book_create(self):
+    def test_book_create(self) -> None:
         url = reverse('books-list')
         items_before_count = len(Book.objects.all())
         response = self.client.post(url, data={'title': 'book3', 'author': 'author3',
@@ -46,7 +46,7 @@ class BookApiTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(items_after_count, items_before_count + 1)
 
-    def test_book_update(self):
+    def test_book_update(self) -> None:
         item_id = 1
         url = reverse('books-detail', args=(item_id,))
         data = {'title': 'book3',
@@ -66,7 +66,7 @@ class BookApiTests(APITestCase):
         self.assertEqual(item.pages, response.data['pages'])
         self.assertEqual(item.language, response.data['language'])
 
-    def test_book_delete(self):
+    def test_book_delete(self) -> None:
         item_id = 1
         url = reverse('books-detail', args=(item_id,))
         items_before_count = len(Book.objects.all())
