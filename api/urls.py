@@ -4,7 +4,7 @@ from api import views
 
 
 router = DefaultRouter()
-router.register(r'books', views.BookList)
+router.register(r'books', views.BookViewSet, basename='books')
 
 
 urlpatterns = [
