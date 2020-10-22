@@ -7,7 +7,6 @@ urlpatterns = [
          books_crud.BookList.as_view(), name='search'),
     path('library/create/', books_crud.BookCreate.as_view(), name='create'),
     path('library/update/<int:pk>', books_crud.BookUpdate.as_view(), name='update'),
-    # note: delete path is not currently used in any view, but it's still accessible by url
     path('library/delete/<int:pk>', books_crud.BookDelete.as_view(), name='delete'),
     path('library/books_import/', books_import.BooksImport.as_view(), name='books_import'),
 ]
