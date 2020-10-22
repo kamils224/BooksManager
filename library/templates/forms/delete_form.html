@@ -1,5 +1,5 @@
 {% block content %}
-<form action="{% url 'delete' id %}" method="POST" class="form">
+<form action="{% url 'delete' id %}" method="GET" class="form">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Delete</button>
 </form>
